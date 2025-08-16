@@ -1,0 +1,426 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f0\b\fs28 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 import React, \{ useState \} from 'react';\
+import \{ ChevronLeft, ChevronRight, Dribbble, Target, Users, Sun, Calendar, BookOpen, Repeat \} from 'lucide-react';\
+\
+// Main App component\
+const App = () => \{\
+  // Hardcoded practice plan data based on the provided document\
+  const practicePlan = [\
+    // Month 1\
+    \{\
+      week: 1,\
+      title: "Introduction to Dribbling & Ball Familiarity",\
+      equipment: "Cones, 1 ball per player, pinnies (optional).",\
+      practices: [\
+        \{\
+          title: "Dribbling with Different Surfaces",\
+          sections: [\
+            \{ type: "Warm-up", content: "Free dribbling in a confined area, 'Dribble Tag' (one or two players are 'it' and try to tag others while everyone dribbles)." \},\
+            \{ type: "Technical", content: "Cone Dribbling: Dribble through cones using inside and outside of the foot.\\nStop & Go: Dribble, stop the ball with the sole, accelerate in a new direction.\\nBell Touches: Rapidly tap the top of the ball with alternating feet." \},\
+            \{ type: "Small-Sided Game", content: "3v3 with emphasis on keeping the ball close and changing direction." \},\
+          ]\
+        \},\
+        \{\
+          title: "Protecting the Ball & Changing Pace",\
+          sections: [\
+            \{ type: "Warm-up", content: "'Rob the Nest' (players dribble their ball to a central 'nest' and try to take others' balls back to their own 'nest')." \},\
+            \{ type: "Technical", content: "Shielding: Partner work, one player tries to take the ball while the other shields it with their body.\\nSpeed Dribbling: Dribble quickly in a straight line, then slow down, then speed up again." \},\
+            \{ type: "Small-Sided Game", content: "4v4 with a focus on dribbling into space and protecting the ball when pressured." \},\
+          ]\
+        \}\
+      ]\
+    \},\
+    // Week 2\
+    \{\
+      week: 2,\
+      title: "Basic Passing & Receiving",\
+      equipment: "Cones, 1 ball per player, pinnies (optional).",\
+      practices: [\
+        \{\
+          title: "Inside of the Foot Pass",\
+          sections: [\
+            \{ type: "Warm-up", content: "Partner passing (light passes, focusing on accuracy)." \},\
+            \{ type: "Technical", content: "Stationary Passing: Pairs passing back and forth, focusing on hitting the center of the ball with the inside of the foot.\\nMoving to Receive: Players move to an open space to receive a pass from a coach or teammate." \},\
+            \{ type: "Small-Sided Game", content: "3v3 with a focus on making 2-3 passes before shooting." \},\
+          ]\
+        \},\
+        \{\
+          title: "Receiving & First Touch",\
+          sections: [\
+            \{ type: "Warm-up", content: "Triangle passing (three players pass in a triangle, moving after each pass)." \},\
+            \{ type: "Technical", content: "Soft Touch Receiving: Using the inside of the foot to cushion the ball and bring it under control.\\nReceive and Pass: Receive a pass, take one touch to control, then pass back." \},\
+            \{ type: "Small-Sided Game", content: "4v4 with emphasis on receiving the ball cleanly and making a quick pass." \},\
+          ]\
+        \}\
+      ]\
+    \},\
+    // Week 3\
+    \{\
+      week: 3,\
+      title: "Shooting Fundamentals",\
+      equipment: "Cones, 1 ball per player, mini-goals, pinnies (optional).",\
+      practices: [\
+        \{\
+          title: "Instep Drive (Shooting with Power)",\
+          sections: [\
+            \{ type: "Warm-up", content: "Dribbling with a focus on accelerating towards a target (e.g., cone)." \},\
+            \{ type: "Technical", content: "Stationary Shooting: Players shoot at a small goal or target from a short distance, focusing on proper instep technique (laces).\\nDribble & Shoot: Dribble a few steps, then shoot." \},\
+            \{ type: "Small-Sided Game", content: "3v3 with mini-goals, encouraging players to shoot when opportunities arise." \},\
+          ]\
+        \},\
+        \{\
+          title: "Accuracy & Finishing",\
+          sections: [\
+            \{ type: "Warm-up", content: "Passing and receiving, then a quick shot on goal." \},\
+            \{ type: "Technical", content: "Target Shooting: Divide the goal into sections (e.g., using cones) and have players aim for specific areas.\\nBreakaway Finishing: Coach passes a ball to a player who dribbles towards goal for a shot." \},\
+            \{ type: "Small-Sided Game", content: "4v4, focusing on creating shooting opportunities and accurate shots." \},\
+          ]\
+        \}\
+      ]\
+    \},\
+    // Week 4\
+    \{\
+      week: 4,\
+      title: "Basic Defending & 1v1",\
+      equipment: "Cones, 1 ball per player, pinnies (optional).",\
+      practices: [\
+        \{\
+          title: "Stance & Containment",\
+          sections: [\
+            \{ type: "Warm-up", content: "Mirroring drill (players face each other, one moves, the other mirrors their movement)." \},\
+            \{ type: "Technical", content: "Defensive Stance: Coach demonstrates proper defensive stance (low, on toes, arms out). Players practice shuffling.\\nContainment: One defender tries to 'contain' an attacker with a ball, forcing them wide or stopping their forward progress without tackling." \},\
+            \{ type: "Small-Sided Game", content: "1v1 to goal, focusing on the defender's ability to contain the attacker." \},\
+          ]\
+        \},\
+        \{\
+          title: "Tackling (Poke & Block)",\
+          sections: [\
+            \{ type: "Warm-up", content: "Quick feet drills, agility ladder if available." \},\
+            \{ type: "Technical", content: "Poke Tackle: Practice using the toe to 'poke' the ball away from an attacker.\\nBlock Tackle: Practice stepping in to block a shot or pass. Emphasize safety and proper technique." \},\
+            \{ type: "Small-Sided Game", content: "2v2 to goal, with defenders encouraged to use proper containment and tackling techniques." \},\
+          ]\
+        \}\
+      ]\
+    \},\
+    // Week 5\
+    \{\
+      week: 5,\
+      title: "Combination Play (Give & Go)",\
+      equipment: "Cones, 1 ball per player, pinnies (optional).",\
+      practices: [\
+        \{\
+          title: "Simple Give & Go",\
+          sections: [\
+            \{ type: "Warm-up", content: "Partner passing, incorporating a quick run after the pass." \},\
+            \{ type: "Technical", content: "Give & Go Drill: Player passes to a teammate/coach, runs around a cone, and receives the ball back.\\nWall Pass: Using a wall or a stationary target for a quick one-two pass." \},\
+            \{ type: "Small-Sided Game", content: "3v3 with a focus on quick passes and movement off the ball." \},\
+          ]\
+        \},\
+        \{\
+          title: "Give & Go in Small Spaces",\
+          sections: [\
+            \{ type: "Warm-up", content: "Dynamic stretching with a ball, focusing on quick changes of direction." \},\
+            \{ type: "Technical", content: "Triangle Give & Go: Three players in a triangle, one passes, runs, receives, passes to the next.\\nGive & Go to Finish: Incorporate a shot on goal after a successful give & go." \},\
+            \{ type: "Small-Sided Game", content: "4v4, encouraging players to look for and execute give & go passes." \},\
+          ]\
+        \}\
+      ]\
+    \},\
+    // Week 6\
+    \{\
+      week: 6,\
+      title: "Attacking Principles (Width & Depth)",\
+      equipment: "Cones, 1 ball per player, pinnies (optional).",\
+      practices: [\
+        \{\
+          title: "Spreading Out",\
+          sections: [\
+            \{ type: "Warm-up", content: "Free dribbling, emphasizing using the entire practice area." \},\
+            \{ type: "Technical", content: "Spreading Out Drill: Players start in a tight group, then spread out to create passing lanes when a ball is introduced.\\nPassing Grid with Movement: Players pass within a grid, constantly moving to open space." \},\
+            \{ type: "Small-Sided Game", content: "4v4 on a slightly larger field, encouraging players to use the width of the field." \},\
+          ]\
+        \},\
+        \{\
+          title: "Forward Runs & Support",\
+          sections: [\
+            \{ type: "Warm-up", content: "Passing and receiving, focusing on looking up before passing." \},\
+            \{ type: "Technical", content: "Through Ball Drill: Coach passes a ball 'through' defenders for an attacker to run onto.\\nSupport Runs: Players practice making runs to support the player with the ball (e.g., providing a back pass option)." \},\
+            \{ type: "Small-Sided Game", content: "4v4, focusing on players making runs into attacking space and supporting the ball carrier." \},\
+          ]\
+        \}\
+      ]\
+    \},\
+    // Week 7\
+    \{\
+      week: 7,\
+      title: "Defensive Principles (Pressure, Cover, Balance)",\
+      equipment: "Cones, 1 ball per player, pinnies (optional).",\
+      practices: [\
+        \{\
+          title: "Pressure & Contain",\
+          sections: [\
+            \{ type: "Warm-up", content: "1v1 dribbling battles." \},\
+            \{ type: "Technical", content: "Pressure Drill: One defender pressures the attacker with the ball, forcing them to make a decision quickly.\\nDelaying Attack: Defender focuses on slowing down the attacker's progress, allowing teammates to recover." \},\
+            \{ type: "Small-Sided Game", content: "2v2 to two small goals, emphasizing immediate pressure on the ball." \},\
+          ]\
+        \},\
+        \{\
+          title: "Cover & Balance",\
+          sections: [\
+            \{ type: "Warm-up", content: "Defensive stance and shuffling drills." \},\
+            \{ type: "Technical", content: "Covering Defender: One defender pressures, a second defender positions themselves to 'cover' behind.\\nDefensive Triangle: Three defenders practice maintaining a triangular shape to cover space." \},\
+            \{ type: "Small-Sided Game", content: "4v4, with a focus on two defenders pressuring and covering, and the other two balancing the defense." \},\
+          ]\
+        \}\
+      ]\
+    \},\
+    // Week 8 (intentionally skipped)\
+    // Week 9\
+    \{\
+      week: 9,\
+      title: "Throw-ins & Goal Kicks",\
+      equipment: "Cones, 1 ball per player, mini-goals (for goal kicks), pinnies (optional).",\
+      practices: [\
+        \{\
+          title: "Proper Throw-in Technique",\
+          sections: [\
+            \{ type: "Warm-up", content: "Arm circles, shoulder stretches." \},\
+            \{ type: "Technical", content: "Stationary Throw-ins: Players practice proper two-hand, over-the-head throw-ins, keeping feet on the ground.\\nTarget Throw-ins: Players aim for a cone or teammate." \},\
+            \{ type: "Small-Sided Game", content: "Play a game where every out-of-bounds results in a throw-in, encouraging proper technique." \},\
+          ]\
+        \},\
+        \{\
+          title: "Goal Kicks & Goalkeeper Distribution",\
+          sections: [\
+            \{ type: "Warm-up", content: "Light jogging, leg swings." \},\
+            \{ type: "Technical", content: "Goal Kicks: Players practice taking goal kicks, focusing on striking the ball with the instep for distance.\\nGoalkeeper Throws: Goalkeepers practice throwing the ball (overhand or underhand) for accuracy and distance to teammates, focusing on starting attacks." \},\
+            \{ type: "Small-Sided Game", content: "Full field (or larger small-sided) game, emphasizing proper restarts from goal kicks and encouraging goalkeepers to distribute the ball effectively with throws." \},\
+          ]\
+        \}\
+      ]\
+    \},\
+    // Week 10\
+    \{\
+      week: 10,\
+      title: "Corner Kicks & Free Kicks",\
+      equipment: "Cones, 1 ball per player, mini-goals, pinnies (optional).",\
+      practices: [\
+        \{\
+          title: "Corner Kick Delivery",\
+          sections: [\
+            \{ type: "Warm-up", content: "Passing and shooting drills." \},\
+            \{ type: "Technical", content: "Corner Kick Practice: Players practice kicking the ball from the corner, aiming for the penalty spot or near post.\\nReceiving Corners: Players practice making runs into the box to receive a corner." \},\
+            \{ type: "Small-Sided Game", content: "Practice corners in a game scenario, with players trying to score from the service." \},\
+          ]\
+        \},\
+        \{\
+          title: "Free Kick Placement",\
+          sections: [\
+            \{ type: "Warm-up", content: "Shooting practice." \},\
+            \{ type: "Technical", content: "Direct Free Kicks: Players practice shooting directly at goal from various distances.\\nIndirect Free Kicks: Practice short passes from free kicks to set up a shot or cross." \},\
+            \{ type: "Small-Sided Game", content: "Incorporate free kicks into a game, allowing players to practice different scenarios." \},\
+          ]\
+        \}\
+      ]\
+    \},\
+    // Week 11\
+    \{\
+      week: 11,\
+      title: "Positional Awareness & Communication",\
+      equipment: "Cones, 1 ball per player, pinnies (optional).",\
+      practices: [\
+        \{\
+          title: "Attacking Positions (Forwards/Midfielders)",\
+          sections: [\
+            \{ type: "Warm-up", content: "Passing and movement drills in a grid." \},\
+            \{ type: "Technical", content: "Attacking Runs: Players practice making runs into space (e.g., diagonal runs, runs behind defenders).\\nTriangle Passing with Movement: Emphasize communication ('man on,' 'turn,' 'through')." \},\
+            \{ type: "Small-Sided Game", content: "5v5 or 6v6, encouraging players to find open space and communicate." \},\
+          ]\
+        \},\
+        \{\
+          title: "Defensive Positions (Defenders/Midfielders)",\
+          sections: [\
+            \{ type: "Warm-up", content: "Defensive shuffling and containment drills." \},\
+            \{ type: "Technical", content: "Defensive Shape: Players practice maintaining a defensive line and shifting as the ball moves.\\nCommunication on Defense: Emphasize calling out 'pressure,' 'cover,' 'step,' 'drop.'" \},\
+            \{ type: "Small-Sided Game", content: "5v5 or 6v6, focusing on defensive organization and communication." \},\
+          ]\
+        \}\
+      ]\
+    \},\
+    // Week 12\
+    \{\
+      week: 12,\
+      title: "Review & Fun Games",\
+      equipment: "Cones, 1 ball per player, mini-goals, pinnies (optional).",\
+      practices: [\
+        \{\
+          title: "Skill Challenge Day",\
+          sections: [\
+            \{ type: "Warm-up", content: "Player's choice of favorite warm-up game." \},\
+            \{ type: "Technical", content: "Set up stations for dribbling challenges, passing accuracy, and shooting accuracy. Have players rotate through." \},\
+            \{ type: "Small-Sided Game", content: "'World Cup' style tournament, mixing up teams." \},\
+          ]\
+        \},\
+        \{\
+          title: "Scrimmage & Celebration",\
+          sections: [\
+            \{ type: "Warm-up", content: "Light free play." \},\
+            \{ type: "Technical", content: "Short, fun drills reviewing key skills." \},\
+            \{ type: "Small-Sided Game", content: "Full-length scrimmage, letting the kids play and enjoy the game they've been learning." \},\
+          ]\
+        \}\
+      ]\
+    \},\
+  ];\
+\
+  const [currentWeek, setCurrentWeek] = useState(0);\
+  const [currentPractice, setCurrentPractice] = useState(0);\
+\
+  // Function to navigate to the next practice\
+  const nextPractice = () => \{\
+    if (currentPractice < practicePlan[currentWeek].practices.length - 1) \{\
+      setCurrentPractice(currentPractice + 1);\
+    \} else \{\
+      // If at the end of the practices for the current week, move to the next week's first practice\
+      if (currentWeek < practicePlan.length - 1) \{\
+        setCurrentWeek(currentWeek + 1);\
+        setCurrentPractice(0);\
+      \}\
+    \}\
+  \};\
+\
+  // Function to navigate to the previous practice\
+  const prevPractice = () => \{\
+    if (currentPractice > 0) \{\
+      setCurrentPractice(currentPractice - 1);\
+    \} else \{\
+      // If at the beginning of the practices for the current week, move to the previous week's last practice\
+      if (currentWeek > 0) \{\
+        const newWeek = currentWeek - 1;\
+        const lastPracticeInPrevWeek = practicePlan[newWeek].practices.length - 1;\
+        setCurrentWeek(newWeek);\
+        setCurrentPractice(lastPracticeInPrevWeek);\
+      \}\
+    \}\
+  \};\
+\
+  const currentPracticeData = practicePlan[currentWeek].practices[currentPractice];\
+  const equipment = practicePlan[currentWeek].equipment;\
+\
+  // Function to get the correct icon based on the section type\
+  const getIcon = (type) => \{\
+    switch (type) \{\
+      case 'Warm-up':\
+        return <Sun size=\{20\} className="mr-2 text-yellow-500" />;\
+      case 'Technical':\
+        return <Dribbble size=\{20\} className="mr-2 text-blue-500" />;\
+      case 'Small-Sided Game':\
+        return <Users size=\{20\} className="mr-2 text-green-500" />;\
+      case 'Cool-down & Wrap-up':\
+        return <Repeat size=\{20\} className="mr-2 text-indigo-500" />;\
+      default:\
+        return null;\
+    \}\
+  \};\
+\
+  return (\
+    <div className="bg-gray-50 min-h-screen font-sans text-gray-800 p-4 sm:p-8 flex flex-col items-center">\
+      \{/* Header and navigation */\}\
+      <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 mb-6">\
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 leading-tight">Coach's Plan</h1>\
+        <p className="text-md sm:text-lg text-center text-gray-500 mt-2">\
+          Week \{practicePlan[currentWeek].week\}: \{practicePlan[currentWeek].title\}\
+        </p>\
+\
+        \{/* Navigation buttons */\}\
+        <div className="flex justify-between items-center mt-6">\
+          <button\
+            onClick=\{prevPractice\}\
+            className=\{`p-3 rounded-full shadow-lg transition-transform transform $\{currentWeek === 0 && currentPractice === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600 active:scale-95'\}`\}\
+            disabled=\{currentWeek === 0 && currentPractice === 0\}\
+          >\
+            <ChevronLeft className="text-white" />\
+          </button>\
+          <div className="flex flex-col items-center">\
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-700">Practice \{currentPractice + 1\}</h2>\
+            <p className="text-sm text-gray-400 text-center">\{currentPracticeData.title\}</p>\
+          </div>\
+          <button\
+            onClick=\{nextPractice\}\
+            className=\{`p-3 rounded-full shadow-lg transition-transform transform $\{currentWeek === practicePlan.length - 1 && currentPractice === practicePlan[currentWeek].practices.length - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600 active:scale-95'\}`\}\
+            disabled=\{currentWeek === practicePlan.length - 1 && currentPractice === practicePlan[currentWeek].practices.length - 1\}\
+          >\
+            <ChevronRight className="text-white" />\
+          </button>\
+        </div>\
+      </div>\
+\
+      \{/* Equipment and Practice Details */\}\
+      <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 mb-6">\
+        <h3 className="text-xl font-bold text-gray-700 flex items-center mb-4">\
+          <BookOpen size=\{20\} className="mr-2 text-purple-500" />\
+          Equipment\
+        </h3>\
+        <p className="text-gray-600">\{equipment\}</p>\
+      </div>\
+\
+      \{/* Practice Sections */\}\
+      <div className="w-full max-w-2xl space-y-4">\
+        \{currentPracticeData.sections.map((section, index) => (\
+          <div key=\{index\} className="bg-white rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl">\
+            <div className="flex items-center mb-3">\
+              \{getIcon(section.type)\}\
+              <h4 className="text-lg sm:text-xl font-semibold text-gray-800">\{section.type\}</h4>\
+            </div>\
+            <p className="text-gray-600 whitespace-pre-line leading-relaxed">\{section.content\}</p>\
+          </div>\
+        ))\}\
+\
+        \{/* Static section for general cool-down & wrap-up */\}\
+        <div className="bg-white rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl">\
+          <div className="flex items-center mb-3">\
+            <Repeat size=\{20\} className="mr-2 text-indigo-500" />\
+            <h4 className="text-lg sm:text-xl font-semibold text-gray-800">Cool-down & Wrap-up</h4>\
+          </div>\
+          <p className="text-gray-600 whitespace-pre-line leading-relaxed">\
+            Light jogging and static stretches.\
+            Brief discussion of the practice, highlighting positives and areas for improvement.\
+            Reinforce good sportsmanship and effort.\
+          </p>\
+        </div>\
+      </div>\
+\
+      \{/* Coaching Tips */\}\
+      <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 mt-6">\
+        <h3 className="text-xl font-bold text-gray-700 flex items-center mb-4">\
+          <Target size=\{20\} className="mr-2 text-red-500" />\
+          Coaching Tips\
+        </h3>\
+        <ul className="list-disc list-inside space-y-2 text-gray-600">\
+          <li>**Keep it Fun:** This is paramount. Incorporate games and make drills engaging.</li>\
+          <li>**Positive Reinforcement:** Praise effort and good decisions, not just perfect execution.</li>\
+          <li>**Demonstrate:** Show them how to do it, don't just tell them.</li>\
+          <li>**Keep it Simple:** Break down complex skills into small, understandable parts.</li>\
+          <li>**Maximize Touches:** Design drills that give every player lots of time on the ball.</li>\
+          <li>**Small-Sided Games:** These are crucial for development at this age, as they provide more touches, more decision-making opportunities, and more engagement.</li>\
+          <li>**Hydration Breaks:** Always include regular water breaks.</li>\
+          <li>**Safety First:** Ensure the playing area is safe and players are using appropriate gear.</li>\
+          <li>**Be Patient:** Learning takes time and repetition.</li>\
+          <li>**Encourage Creativity:** Let them try new things and express themselves with the ball.</li>\
+        </ul>\
+      </div>\
+      \
+    </div>\
+  );\
+\};\
+\
+export default App;\
+}

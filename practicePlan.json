@@ -1,0 +1,28 @@
+[
+  {
+    "week": 1,
+    "title": "Introduction to Dribbling & Ball Familiarity",
+    "equipment": "Cones, 1 ball per player, pinnies (optional).",
+    "practices": [
+      {
+        "title": "Dribbling with Different Surfaces",
+        "sections": [
+          {
+            "type": "Warm-up",
+            "content": "Free dribbling in a confined area, 'Dribble Tag' (one or two players are 'it' and try to tag others while everyone dribbles)."
+          },
+          {
+            "type": "Technical",
+            "content": "Cone Dribbling: Dribble through cones using inside and outside of the foot.\nStop & Go: Dribble, stop the ball with the sole, accelerate in a new direction.\nBell Touches: Rapidly tap the top of the ball with alternating feet."
+          },
+          {
+            "type": "Small-Sided Game",
+            "content": "3v3 with emphasis on keeping the ball close and changing direction."
+          }
+        ]
+      },
+      ...
+    ]
+  },
+  ...
+]
